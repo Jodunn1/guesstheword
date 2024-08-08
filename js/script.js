@@ -8,6 +8,7 @@ const remainingGuessSpan = document.querySelector(".remaining span");
 const messages = document.querySelector(".message");
 const buttonPlayAgain = document.querySelector(".play-again");
 const word = "magnolia";
+const guessedLetters = [];
 
 //wipCircles = words in progress to represent each letter in word
 placeholder = function (word) {
@@ -26,4 +27,19 @@ guessButton.addEventListener("click", function (e) {
     const guessInput = guessLetter.value;
     console.log(guessInput);
     guessLetter.value = "";
+    messages.innerText = "";
+    playerInput(input);
 });
+
+const playerInput = function (input) {
+    const acceptedLetter = /[a-zA-Z]/;
+    if (input.length === 0) {
+        messages.innerText = "You have to input a letter to guess";
+    } else if (input > 1) {
+        messages.innerText = "You are only able to input one letter at a time. Please try again.";
+    } else if (!input.match(acceptedLetter)) {
+        messages.innerText = "Please try and submit a letter a-z";
+    } else {
+        return input;
+    }
+}
